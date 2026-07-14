@@ -37,7 +37,7 @@ services:
       redis:
         condition: service_healthy
   redis:
-    image: redis:7.4.9
+    image: redis:7
     container_name: affine_redis
     healthcheck:
       test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
@@ -75,6 +75,8 @@ x-casaos:
   developer: AFFiNE
   icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/affine.svg
   tips: {Change postgres password}
+  title:
+    en_US: AFFiNE
   port_map: "3010"
   update_at: "2026-07-14"
   repo: https://github.com/toeverything/affine
