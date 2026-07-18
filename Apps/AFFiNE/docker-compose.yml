@@ -1,4 +1,4 @@
-name: affine
+name: AFFiNE
 services:
   affine:
     image: ghcr.io/toeverything/affine:stable
@@ -74,9 +74,12 @@ x-casaos:
     en_US: Notion alternative.
   developer: AFFiNE
   icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/affine.svg
-  tips: {Change postgres password}
+  tips:
+  before_install:
+    en_US: |
+      Change postgres password, AFFINE_SERVER_EXTERNAL_URL=https://affine.yourdomain.com
   title:
     en_US: AFFiNE
   port_map: "3010"
-  update_at: "2026-07-14"
+  update_at: "2026-07-18"
   repo: https://github.com/toeverything/affine
