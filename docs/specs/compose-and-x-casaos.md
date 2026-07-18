@@ -9,7 +9,7 @@ This page focuses on the top-level `x-casaos` block, which is the store-specific
 For the rest of the Compose file:
 
 - follow the official Docker Compose file reference: https://docs.docker.com/reference/compose-file/
-- use the official `services` reference for service definitions: https://docs.docker.com/reference/compose-file/services/
+- use the official `services` reference for service definitions: [services](./docs/specs/docker-compose services.md)
 - use the official top-level `name` reference: https://docs.docker.com/reference/compose-file/version-and-name/
 
 In other words:
