@@ -1,4 +1,4 @@
-name: AFFiNE
+name: affine
 services:
   affine:
     image: ghcr.io/toeverything/affine:stable
@@ -64,22 +64,14 @@ services:
     restart: unless-stopped
 x-casaos:
   id: org.mempii.affine
-  architectures:
-    - amd64
-    - arm64
   main: affine
-  author: mempii
-  category: Productivity
-  description:
-    en_US: Notion alternative.
-  developer: AFFiNE
+  index: /
+  port_map: "3010"
   icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/affine.svg
-  tips:
-  before_install:
-    en_US: |
-      Change postgres password, AFFINE_SERVER_EXTERNAL_URL=https://affine.yourdomain.com
   title:
     en_US: AFFiNE
-  port_map: "3010"
-  update_at: "2026-07-18"
-  repo: https://github.com/toeverything/affine
+  category: Productivity
+  tips:
+    before_install:
+      en_US: |
+        Change postgres password, AFFINE_SERVER_EXTERNAL_URL=https://affine.yourdomain.com

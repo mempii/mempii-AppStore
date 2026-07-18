@@ -1,14 +1,8 @@
 {
   "version": 2,
-  "store_id": "mempii-AppStore",
+  "store_id": "mempii-appstore",
   "name": {
-    "en_GB": "mempii App Store",
-    "en_US": "mempii App Store"
+    "en_US": "App Store maintained by mempii"
   },
-  "description": {
-    "en_GB": "",
-    "en_US": ""
-  },
-  "maintainer": "mempii",
-  "url": "https://github.com/mempii/mempii-AppStore"
+  "maintainer": "mempii"
 }

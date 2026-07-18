@@ -1,4 +1,4 @@
-name: Kimai
+name: kimai
 services:
   sqldb:
     image: mysql:8.3
@@ -38,23 +38,15 @@ services:
     restart: unless-stopped
     container_name: kimai-server
 x-casaos:
-  id: org.mempii.kimai
-  architectures:
-    - amd64
-    - arm64
+  id: com.mempii.kimai
   main: kimai
-  author: mempii
-  category: Productivity
-  description:
-    en_US: Time tracker.
-  developer: Kimai
+  index: /
+  port_map: "8001"
   icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/kimai.svg
+  title:
+    en_US: Kimai
+  category: Productivity
   tips:
     before_install:
       en_US: |
         Change mysql root password, Kimai admin password, domain name and admin e-mail.
-  title:
-    en_US: Kimai
-  port_map: "8001"
-  update_at: "2026-07-18"
-  repo: https://github.com/kimai/kimai
