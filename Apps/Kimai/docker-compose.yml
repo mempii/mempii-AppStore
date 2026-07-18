@@ -17,6 +17,7 @@ services:
       timeout: 5s
       retries: 12
       start_period: 30s
+    container_name: kimai-db
   kimai:
     image: kimai/kimai2:stable
     depends_on:
@@ -35,6 +36,7 @@ services:
       - ADMINPASS=changethis
       - "DATABASE_URL=mysql://kimaiuser:kimaipassword@sqldb/kimai?charset=utf8mb4&serverVersion=8.3.0"
     restart: unless-stopped
+    container_name: kimai-server
 x-casaos:
   id: org.mempii.kimai
   architectures:
