@@ -3,12 +3,12 @@ services:
   sqldb:
     image: mysql:8.3
     volumes:
-      - /DATA/AppData/kimai/mysql:/var/lib/mysql
+    - /DATA/AppData/kimai/mysql:/var/lib/mysql
     environment:
-      - MYSQL_DATABASE=kimai
-      - MYSQL_USER=kimaiuser
-      - MYSQL_PASSWORD=kimaipassword
-      - MYSQL_ROOT_PASSWORD=changethis
+    - MYSQL_DATABASE=kimai
+    - MYSQL_USER=kimaiuser
+    - MYSQL_PASSWORD=kimaipassword
+    - MYSQL_ROOT_PASSWORD=changethis
     command: --default-storage-engine innodb
     restart: unless-stopped
     healthcheck:
@@ -25,27 +25,26 @@ services:
         condition: service_healthy
         restart: true
     volumes:
-      - /DATA/AppData/kimai/data:/opt/kimai/var/data
-      - /DATA/AppData/kimai/plugins:/opt/kimai/var/plugins
+    - /DATA/AppData/kimai/data:/opt/kimai/var/data
+    - /DATA/AppData/kimai/plugins:/opt/kimai/var/plugins
     ports:
-      - 8001:8001
+    - 8001:8001
     environment:
-      - APP_SECRET=change-this-to-a-long-string
-      - TRUSTED_HOSTS=kimai.domain.com
-      - ADMINMAIL=kimai@domain.com
-      - ADMINPASS=changethis
-      - "DATABASE_URL=mysql://kimaiuser:kimaipassword@sqldb/kimai?charset=utf8mb4&serverVersion=8.3.0"
+    - APP_SECRET=change-this-to-a-long-string
+    - TRUSTED_HOSTS=kimai.domain.com
+    - ADMINMAIL=kimai@domain.com
+    - ADMINPASS=changethis
+    - DATABASE_URL=mysql://kimaiuser:kimaipassword@sqldb/kimai?charset=utf8mb4&serverVersion=8.3.0
     restart: unless-stopped
     container_name: kimai-server
 x-casaos:
   id: com.mempii.kimai
   main: kimai
   index: /
-  port_map: "8001"
-  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/kimai.svg
+  port_map: '8001'
+  icon: https://cdn.jsdelivr.net/gh/mempii/mempii-AppStore@gh-pages/apps/com.mempii.kimai/assets/icon.svg
   title:
     en_US: Kimai
-  category: Productivity
   tips:
     before_install:
       en_US: |
