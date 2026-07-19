@@ -2,7 +2,12 @@
   "version": 2,
   "store_id": "mempii-appstore",
   "name": {
-    "en_US": "App Store maintained by mempii"
+    "en_US": "mempii App Store"
   },
-  "maintainer": "mempii"
+  "description": {
+    "en_US": "A collection of self-hosted Docker applications curated by mempii for CasaOS"
+  },
+  "maintainer": "mempii",
+  "url": "https://github.com/mempii/mempii-AppStore",
+  "icon": "https://cdn.jsdelivr.net/gh/mempii/mempii-AppStore@gh-pages/store-icon.svg"
 }

@@ -42,9 +42,26 @@ x-casaos:
   main: kimai
   index: /
   port_map: '8001'
+  scheme: http
   icon: https://cdn.jsdelivr.net/gh/mempii/mempii-AppStore@gh-pages/apps/com.mempii.kimai/assets/icon.svg
   title:
     en_US: Kimai
+  tagline:
+    en_US: Time tracking and invoicing application
+  description:
+    en_US: |
+      Kimai is a self-hosted time tracking and invoicing application that helps you track time spent on projects and tasks. 
+      It provides detailed reporting, invoicing capabilities, and multi-user support.
+  category: Productivity
+  author: mempii
+  developer: Kimai Team
+  version: "2.0.0"
+  update_at: "2025-01-19"
+  architectures:
+    - amd64
+    - arm64
+  website: https://www.kimai.org
+  repo: https://github.com/kimai/kimai
   tips:
     before_install:
       en_US: |
