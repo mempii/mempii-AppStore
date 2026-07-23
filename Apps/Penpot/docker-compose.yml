@@ -100,7 +100,7 @@ services:
       - VALKEY_EXTRA_FLAGS=--maxmemory 128mb --maxmemory-policy volatile-lfu
     restart: unless-stopped
 
-x-penpot:
+x-casaos:
   id: org.mempii.penpot
   main: penpot-frontend
   index: /
