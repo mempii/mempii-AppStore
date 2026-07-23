@@ -88,10 +88,26 @@ x-casaos:
   main: affine
   index: /
   port_map: '3010'
+  scheme: http
   icon: https://cdn.jsdelivr.net/gh/mempii/mempii-AppStore@gh-pages/apps/org.mempii.affine/assets/icon.svg
   title:
     en_US: AFFiNE
+  tagline:
+    en_US: Self-hosted knowledge base for better collaboration
+  description:
+    en_US: |
+      AFFiNE is a self-hosted knowledge base that allows you to create, edit, and collaborate on documents in real-time. 
+      It provides a modern, intuitive interface for managing knowledge and documentation.
   category: Productivity
+  author: mempii
+  developer: TOEVERYTHING
+  version: "1.0.0"
+  update_at: "2025-01-19"
+  architectures:
+    - amd64
+    - arm64
+  website: https://affine.pro
+  repo: https://github.com/toeverything/AFFiNE
   tips:
     before_install:
       en_US: |

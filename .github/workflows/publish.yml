@@ -1,0 +1,40 @@
+name: Publish App Store
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Build static appstore dist
+        run: |
+          chmod +x scripts/build_dist.sh
+          ./scripts/build_dist.sh
+
+      - name: Disable Jekyll
+        run: |
+          touch dist/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./dist
+          keep_files: false
+
+      - name: Purge jsDelivr cache
+        run: |
+          curl -fsSL "https://purge.jsdelivr.net/gh/${{ github.repository }}@gh-pages/index.json" || true
+          curl -fsSL "https://purge.jsdelivr.net/gh/${{ github.repository }}@gh-pages/store.json" || true
