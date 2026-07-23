@@ -1,23 +1,6 @@
 name: kimai
+
 services:
-  sqldb:
-    image: mysql:8.3
-    volumes:
-    - /DATA/AppData/kimai/mysql:/var/lib/mysql
-    environment:
-    - MYSQL_DATABASE=kimai
-    - MYSQL_USER=kimaiuser
-    - MYSQL_PASSWORD=kimaipassword
-    - MYSQL_ROOT_PASSWORD=changethis
-    command: --default-storage-engine innodb
-    restart: unless-stopped
-    healthcheck:
-      test: mysqladmin -uroot -p$$MYSQL_ROOT_PASSWORD ping -h 127.0.0.1 --silent
-      interval: 10s
-      timeout: 5s
-      retries: 12
-      start_period: 30s
-    container_name: kimai-db
   kimai:
     image: kimai/kimai2:stable
     depends_on:
@@ -30,13 +13,35 @@ services:
     ports:
     - 8001:8001
     environment:
-    - APP_SECRET=change-this-to-a-long-string
-    - TRUSTED_HOSTS=kimai.domain.com
-    - ADMINMAIL=kimai@domain.com
-    - ADMINPASS=changethis
+    - APP_SECRET=CHANGE-THIS-TO-A-LONG-STRING
+    - TRUSTED_HOSTS=kimai.yourdomain.com
+    - ADMINMAIL=kimai@yourdomain.com
+    - ADMINPASS=CHANGETHIS2
+
     - DATABASE_URL=mysql://kimaiuser:kimaipassword@sqldb/kimai?charset=utf8mb4&serverVersion=8.3.0
     restart: unless-stopped
     container_name: kimai-server
+
+  sqldb:
+    image: mysql:8.3
+    volumes:
+    - /DATA/AppData/kimai/mysql:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=CHANGETHIS1
+
+    - MYSQL_DATABASE=kimai
+    - MYSQL_USER=kimaiuser
+    - MYSQL_PASSWORD=kimaipassword
+    command: --default-storage-engine innodb
+    restart: unless-stopped
+    healthcheck:
+      test: mysqladmin -uroot -p$$MYSQL_ROOT_PASSWORD ping -h 127.0.0.1 --silent
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    container_name: kimai-db
+
 x-casaos:
   id: com.mempii.kimai
   main: kimai
@@ -48,4 +53,4 @@ x-casaos:
   tips:
     before_install:
       en_US: |
-        Change mysql root password, Kimai admin password, domain name and admin e-mail.
+        Change APP_SECRET, MYSQL_ROOT_PASSWORD (CHANGETHIS1), kimai ADMINPASS (CHANGETHIS2), TRUSTED_HOSTS and ADMINMAIL.

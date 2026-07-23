@@ -1,0 +1,115 @@
+name: penpot
+services:
+  penpot-frontend:
+    image: penpotapp/frontend:latest
+    container_name: penpot-frontend
+    depends_on:
+      - penpot-backend
+      - penpot-exporter
+      - penpot-mcp
+    environment:
+      - PENPOT_PUBLIC_URI=http://CHANGETHIS1:9001
+      - PENPOT_FLAGS=enable-disable-email-verification tiered-file-data-storage disable-secure-session-cookies enable-mcp enable-prepl-server
+      - PENPOT_HTTP_SERVER_MAX_BODY_SIZE=367001600
+
+      - PENPOT_BACKEND_URI=http://penpot-backend:6060
+      - PENPOT_EXPORTER_URI=http://penpot-exporter:6061
+    ports:
+      - 9001:8080
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/penpot/assets:/opt/data/assets
+
+  penpot-backend:
+    image: penpotapp/backend:latest
+    container_name: penpot-backend
+    depends_on:
+      penpot-postgres:
+        condition: service_healthy
+      penpot-valkey:
+        condition: service_healthy
+    environment:
+      - PENPOT_PUBLIC_URI=http://CHANGETHIS1:9001
+      - PENPOT_SECRET_KEY=CHANGETHIS2
+      - PENPOT_FLAGS=enable-disable-email-verification tiered-file-data-storage disable-secure-session-cookies enable-mcp enable-prepl-server
+      - PENPOT_HTTP_SERVER_MAX_BODY_SIZE=367001600
+
+      - PENPOT_DATABASE_URI=postgresql://penpot-postgres/penpot
+      - PENPOT_DATABASE_USERNAME=penpot
+      - PENPOT_DATABASE_PASSWORD=penpot
+
+      - PENPOT_REDIS_URI=redis://penpot-valkey/0
+
+      - PENPOT_OBJECTS_STORAGE_BACKEND=fs
+      - PENPOT_OBJECTS_STORAGE_FS_DIRECTORY=/opt/data/assets
+
+      - PENPOT_TELEMETRY_ENABLED=false
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/penpot/assets:/opt/data/assets
+
+  penpot-mcp:
+    image: penpotapp/mcp:latest
+    container_name: penpot-mcp
+    restart: unless-stopped
+
+  penpot-exporter:
+    image: penpotapp/exporter:latest
+    container_name: penpot-exporter
+    depends_on:
+      penpot-valkey:
+        condition: service_healthy
+    environment:
+      - PENPOT_PUBLIC_URI=http://CHANGETHIS1:9001
+      - PENPOT_SECRET_KEY=CHANGETHIS2
+
+      - PENPOT_INTERNAL_URI=http://penpot-frontend:8080
+
+      - PENPOT_REDIS_URI=redis://penpot-valkey/0
+    restart: unless-stopped
+
+  penpot-postgres:
+    image: postgres:15
+    container_name: penpot-postgres
+    stop_signal: SIGINT
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U penpot"]
+      interval: 2s
+      timeout: 10s
+      retries: 5
+      start_period: 2s
+    environment:
+      - POSTGRES_DB=penpot
+      - POSTGRES_PASSWORD=penpot
+      - POSTGRES_USER=penpot
+      - POSTGRES_INITDB_ARGS=--data-checksums
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/penpot/pgdata:/var/lib/postgresql/data
+
+  penpot-valkey:
+    image: valkey/valkey:8.1
+    container_name: penpot-valkey
+    healthcheck:
+      test: ["CMD-SHELL", "valkey-cli ping | grep PONG"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+      start_period: 3s
+    environment:
+      - VALKEY_EXTRA_FLAGS=--maxmemory 128mb --maxmemory-policy volatile-lfu
+    restart: unless-stopped
+
+x-penpot:
+  id: org.mempii.penpot
+  main: penpot-frontend
+  index: /
+  port_map: '9001'
+  icon: https://cdn.jsdelivr.net/gh/mempii/mempii-AppStore@gh-pages/apps/org.mempii.penpot/assets/icon.svg
+  title:
+    en_US: Penpot
+  category: Productivity
+  tips:
+    before_install:
+      en_US: |
+        Change PENPOT_PUBLIC_URI (CHANGETHIS1) and PENPOT_SECRET_KEY (CHANGETHIS2). All the values need to identical between the services!

@@ -1,4 +1,5 @@
 name: affine
+
 services:
   affine:
     image: ghcr.io/toeverything/affine:stable
@@ -16,10 +17,13 @@ services:
     - /DATA/AppData/affine/storage:/root/.affine/storage
     - /DATA/AppData/affine/config:/root/.affine/config
     environment:
+    - AFFINE_SERVER_EXTERNAL_URL=https://affine.yourdomain.com
+    - DATABASE_URL=postgresql://affine:CHANGETHIS1@postgres:5432/affine
+
     - REDIS_SERVER_HOST=redis
-    - DATABASE_URL=postgresql://affine:changethis@postgres:5432/affine
     - AFFINE_INDEXER_ENABLED=false
     restart: unless-stopped
+
   affine_migration:
     image: ghcr.io/toeverything/affine:stable
     container_name: affine_migration_job
@@ -31,14 +35,16 @@ services:
     - -c
     - node ./scripts/self-host-predeploy.js
     environment:
+    - DATABASE_URL=postgresql://affine:CHANGETHIS1@postgres:5432/affine
+
     - REDIS_SERVER_HOST=redis
-    - DATABASE_URL=postgresql://affine:changethis@postgres:5432/affine
     - AFFINE_INDEXER_ENABLED=false
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
+
   redis:
     image: redis:7
     container_name: affine_redis
@@ -53,6 +59,7 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
+
   postgres:
     image: pgvector/pgvector:pg16
     container_name: affine_postgres
@@ -60,7 +67,7 @@ services:
     - /DATA/AppData/affine/pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: affine
-      POSTGRES_PASSWORD: changethis
+      POSTGRES_PASSWORD: CHANGETHIS1
       POSTGRES_DB: affine
       POSTGRES_INITDB_ARGS: --data-checksums
     healthcheck:
@@ -75,6 +82,7 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
+
 x-casaos:
   id: org.mempii.affine
   main: affine
@@ -87,4 +95,4 @@ x-casaos:
   tips:
     before_install:
       en_US: |
-        Change postgres password, AFFINE_SERVER_EXTERNAL_URL=https://affine.yourdomain.com
+        Change postgres password (CHANGETHIS1) and AFFINE_SERVER_EXTERNAL_URL
