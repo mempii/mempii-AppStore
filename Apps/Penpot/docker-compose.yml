@@ -1,17 +1,15 @@
 name: penpot
 services:
   penpot-frontend:
-    image: penpotapp/frontend:latest
+    image: penpotapp/frontend:main
     container_name: penpot-frontend
     depends_on:
       - penpot-backend
       - penpot-exporter
-      - penpot-mcp
     environment:
       - PENPOT_PUBLIC_URI=http://CHANGETHIS1:9001
       - PENPOT_FLAGS=enable-disable-email-verification tiered-file-data-storage disable-secure-session-cookies enable-mcp enable-prepl-server
       - PENPOT_HTTP_SERVER_MAX_BODY_SIZE=367001600
-
       - PENPOT_BACKEND_URI=http://penpot-backend:6060
       - PENPOT_EXPORTER_URI=http://penpot-exporter:6061
     ports:
@@ -21,7 +19,7 @@ services:
       - /DATA/AppData/penpot/assets:/opt/data/assets
 
   penpot-backend:
-    image: penpotapp/backend:latest
+    image: penpotapp/backend:main
     container_name: penpot-backend
     depends_on:
       penpot-postgres:
@@ -33,28 +31,24 @@ services:
       - PENPOT_SECRET_KEY=CHANGETHIS2
       - PENPOT_FLAGS=enable-disable-email-verification tiered-file-data-storage disable-secure-session-cookies enable-mcp enable-prepl-server
       - PENPOT_HTTP_SERVER_MAX_BODY_SIZE=367001600
-
       - PENPOT_DATABASE_URI=postgresql://penpot-postgres/penpot
       - PENPOT_DATABASE_USERNAME=penpot
       - PENPOT_DATABASE_PASSWORD=penpot
-
       - PENPOT_REDIS_URI=redis://penpot-valkey/0
-
       - PENPOT_OBJECTS_STORAGE_BACKEND=fs
       - PENPOT_OBJECTS_STORAGE_FS_DIRECTORY=/opt/data/assets
-
       - PENPOT_TELEMETRY_ENABLED=false
     restart: unless-stopped
     volumes:
       - /DATA/AppData/penpot/assets:/opt/data/assets
 
   penpot-mcp:
-    image: penpotapp/mcp:latest
+    image: penpotapp/mcp:main
     container_name: penpot-mcp
     restart: unless-stopped
 
   penpot-exporter:
-    image: penpotapp/exporter:latest
+    image: penpotapp/exporter:main
     container_name: penpot-exporter
     depends_on:
       penpot-valkey:
@@ -62,9 +56,7 @@ services:
     environment:
       - PENPOT_PUBLIC_URI=http://CHANGETHIS1:9001
       - PENPOT_SECRET_KEY=CHANGETHIS2
-
       - PENPOT_INTERNAL_URI=http://penpot-frontend:8080
-
       - PENPOT_REDIS_URI=redis://penpot-valkey/0
     restart: unless-stopped
 
