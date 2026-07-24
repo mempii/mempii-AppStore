@@ -96,13 +96,13 @@ x-casaos:
     en_US: Self-hosted knowledge base for better collaboration
   description:
     en_US: |
-      AFFiNE is a self-hosted knowledge base that allows you to create, edit, and collaborate on documents in real-time. 
+      AFFiNE is a self-hosted knowledge base that allows you to create, edit, and collaborate on documents in real-time.
       It provides a modern, intuitive interface for managing knowledge and documentation.
   category: Productivity
   author: mempii
   developer: TOEVERYTHING
   version: "1.0.0"
-  update_at: "2025-01-19"
+  update_at: "2026-07-24"
   architectures:
     - amd64
     - arm64

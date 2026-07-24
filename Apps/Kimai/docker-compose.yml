@@ -55,13 +55,13 @@ x-casaos:
     en_US: Time tracking and invoicing application
   description:
     en_US: |
-      Kimai is a self-hosted time tracking and invoicing application that helps you track time spent on projects and tasks. 
+      Kimai is a self-hosted time tracking and invoicing application that helps you track time spent on projects and tasks.
       It provides detailed reporting, invoicing capabilities, and multi-user support.
   category: Productivity
   author: mempii
   developer: Kimai Team
-  version: "2.0.0"
-  update_at: "2025-01-19"
+  version: "1.0.0"
+  update_at: "2026-07-24"
   architectures:
     - amd64
     - arm64

@@ -105,11 +105,27 @@ x-casaos:
   main: penpot-frontend
   index: /
   port_map: '9001'
+  scheme: http
   icon: https://cdn.jsdelivr.net/gh/mempii/mempii-AppStore@gh-pages/apps/org.mempii.penpot/assets/icon.svg
   title:
     en_US: Penpot
+  tagline:
+    en_US: Open-source design & prototyping platform
+  description:
+    en_US: |
+      Penpot is the open-source design tool for design and code collaboration.
+      It brings designers and developers together in a self-hosted workspace.
   category: Productivity
+  author: mempii
+  developer: Penpot
+  version: "1.0.0"
+  update_at: "2026-07-24"
+  architectures:
+    - amd64
+    - arm64
+  website: https://penpot.app
+  repo: https://github.com/penpot/penpot
   tips:
     before_install:
       en_US: |
-        Change PENPOT_PUBLIC_URI (CHANGETHIS1) and PENPOT_SECRET_KEY (CHANGETHIS2). All the values need to identical between the services!
+        Change PENPOT_PUBLIC_URI (CHANGETHIS1) and PENPOT_SECRET_KEY (CHANGETHIS2). All the values need to be identical between the services!
