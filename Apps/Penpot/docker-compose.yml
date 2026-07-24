@@ -106,7 +106,7 @@ x-casaos:
   index: /
   port_map: '9001'
   scheme: http
-  icon: https://cdn.jsdelivr.net/gh/mempii/mempii-AppStore@gh-pages/apps/org.mempii.penpot/assets/icon.svg
+  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/penpot-light.svg
   title:
     en_US: Penpot
   tagline:

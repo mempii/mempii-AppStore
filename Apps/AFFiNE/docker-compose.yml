@@ -89,7 +89,7 @@ x-casaos:
   index: /
   port_map: '3010'
   scheme: http
-  icon: https://cdn.jsdelivr.net/gh/mempii/mempii-AppStore@gh-pages/apps/org.mempii.affine/assets/icon.svg
+  icon: https://cdn.jsdelivr.net/gh/selfhst/icons/svg/affine-light.svg
   title:
     en_US: AFFiNE
   tagline:

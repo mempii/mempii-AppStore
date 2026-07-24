@@ -48,7 +48,7 @@ x-casaos:
   index: /
   port_map: '8001'
   scheme: http
-  icon: https://cdn.jsdelivr.net/gh/mempii/mempii-AppStore@gh-pages/apps/com.mempii.kimai/assets/icon.svg
+  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/kimai.svg
   title:
     en_US: Kimai
   tagline:
